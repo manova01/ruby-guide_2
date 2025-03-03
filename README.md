@@ -1,6 +1,8 @@
-# Ruby Guide Service Provider Platform
+# Ruby Guide
 
-A Flask-based web application for connecting service providers with customers.
+![CI/CD Pipeline](https://github.com/{your-username}/ruby-guide_2/actions/workflows/ci.yml/badge.svg)
+
+A Python web application with Next.js frontend for Ruby programming guide.
 
 ## Features
 
@@ -18,23 +20,30 @@ A Flask-based web application for connecting service providers with customers.
 - Authentication: JWT
 - Frontend: React
 
-## Development Setup
+## Prerequisites
+
+- Python 3.9+
+- Node.js 18+
+- npm or yarn
+
+## Setup
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/ruby-guide_2.git
+git clone https://github.com/{your-username}/ruby-guide_2.git
 cd ruby-guide_2
 ```
 
-2. Create and activate virtual environment:
+2. Set up Python environment:
 ```bash
 python -m venv venv
 source venv/bin/activate  # On Windows: .\venv\Scripts\activate
+pip install -r requirements.txt
 ```
 
-3. Install dependencies:
+3. Set up frontend dependencies:
 ```bash
-pip install -r requirements.txt
+npm install
 ```
 
 4. Set up environment variables:
@@ -43,44 +52,32 @@ cp .env.example .env
 # Edit .env with your configuration
 ```
 
-5. Initialize database:
+5. Run the application:
 ```bash
-flask db upgrade
-```
-
-6. Run the development server:
-```bash
+# Terminal 1 - Backend
 python run.py
+
+# Terminal 2 - Frontend
+npm run dev
 ```
 
-## Testing
+## Development
 
-Run tests using pytest:
-```bash
-pytest
-```
+- Run Python tests: `pytest tests/`
+- Run frontend tests: `npm test`
+- Run linting: `flake8`
+- Build frontend: `npm run build`
 
-## API Documentation
+## CI/CD
 
-### Authentication Endpoints
+The project uses GitHub Actions for CI/CD:
 
-- POST /auth/register - Register new user
-- POST /auth/login - Login user
-- POST /auth/refresh - Refresh access token
-- GET /auth/me - Get current user
+- Python tests and linting
+- Frontend build and tests
+- Security scanning with Snyk
+- Automated deployments
 
-### Service Provider Endpoints
-
-- GET /providers - List all providers
-- POST /providers - Create provider profile
-- GET /providers/<id> - Get provider details
-- PUT /providers/<id> - Update provider profile
-
-### Messaging Endpoints
-
-- GET /messages - Get user messages
-- POST /messages/<recipient_id> - Send message
-- WebSocket events for real-time messaging
+See `.github/workflows/ci.yml` for the complete pipeline configuration.
 
 ## Contributing
 
