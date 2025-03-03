@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block head %}
+<script>
+    // Pass any server-side data to the frontend
+    window.INITIAL_DATA = {
+        apiUrl: "{{ request.host_url }}",
+        socketUrl: "{{ request.host_url }}"
+    };
+</script>
+{% endblock %}
+
+{% block content %}
+<div id="app"></div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Pass initial data from backend to frontend
+    window.INITIAL_DATA = {
+        user: {{ current_user | tojson if current_user.is_authenticated else 'null' | safe }},
+        csrfToken: "{{ csrf_token() }}",
+        apiBaseUrl: "{{ config.API_BASE_URL if config.API_BASE_URL else '' }}"
+    };
+</script>
+{% endblock %}

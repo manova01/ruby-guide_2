@@ -1,59 +1,95 @@
-# Rudzz - Automotive Service Provider Platform
+# Ruby Guide Service Provider Platform
 
-Rudzz is a modern web application that connects customers with automotive service providers based on their location. The platform includes features like user authentication, geolocation-based search, real-time messaging, a blog section, and an admin dashboard.
+A Flask-based web application for connecting service providers with customers.
 
 ## Features
 
-### User Authentication
-- Login with email or phone number
-- Secure password hashing using werkzeug.security
-- JWT-based authentication with Flask-JWT-Extended
-- Multiple user roles: Customer, Service Provider, Admin
-
-### Service Provider Search
-- Geolocation-based search using geopy
-- Advanced filtering options (e.g., service type, ratings)
-- Real-time distance calculation
-
-### Messaging System
-- Direct messaging between users
-- Message history stored in the database
-- Real-time notifications using Flask-SocketIO
-
-### Blog Section
-- Automotive tips and news
-- Rich text editor for admins (e.g., Quill.js)
-- Comment system for users
-
-### Admin Dashboard
-- User management (CRUD operations)
-- Content moderation for blog posts and comments
-- Analytics and reporting (e.g., user activity, service provider performance)
+- User authentication (JWT-based)
+- Service provider profiles
+- Real-time messaging
+- Service search and discovery
+- Rating and review system
 
 ## Tech Stack
 
-- **Backend**: Flask (Python)
-- **Frontend**: React with Next.js
-- **Database**: PostgreSQL
-- **Authentication**: JWT
-- **Real-time Communication**: Flask-SocketIO
-- **Geolocation**: geopy
-- **Styling**: Tailwind CSS
+- Backend: Flask (Python)
+- Database: SQLite (development) / PostgreSQL (production)
+- Real-time Communication: Socket.IO
+- Authentication: JWT
+- Frontend: React
 
-## Running Locally
-
-### Prerequisites
-
-- Python 3.8+
-- Node.js 16+
-- PostgreSQL
-- Redis (for SocketIO)
-
-### Backend Setup
+## Development Setup
 
 1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/rudzz.git
-   cd rudzz
+```bash
+git clone https://github.com/yourusername/ruby-guide_2.git
+cd ruby-guide_2
+```
 
-"# ruby-guide_2" 
+2. Create and activate virtual environment:
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows: .\venv\Scripts\activate
+```
+
+3. Install dependencies:
+```bash
+pip install -r requirements.txt
+```
+
+4. Set up environment variables:
+```bash
+cp .env.example .env
+# Edit .env with your configuration
+```
+
+5. Initialize database:
+```bash
+flask db upgrade
+```
+
+6. Run the development server:
+```bash
+python run.py
+```
+
+## Testing
+
+Run tests using pytest:
+```bash
+pytest
+```
+
+## API Documentation
+
+### Authentication Endpoints
+
+- POST /auth/register - Register new user
+- POST /auth/login - Login user
+- POST /auth/refresh - Refresh access token
+- GET /auth/me - Get current user
+
+### Service Provider Endpoints
+
+- GET /providers - List all providers
+- POST /providers - Create provider profile
+- GET /providers/<id> - Get provider details
+- PUT /providers/<id> - Update provider profile
+
+### Messaging Endpoints
+
+- GET /messages - Get user messages
+- POST /messages/<recipient_id> - Send message
+- WebSocket events for real-time messaging
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details
